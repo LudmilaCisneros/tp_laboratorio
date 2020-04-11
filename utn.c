@@ -2,19 +2,26 @@
 #include <stdlib.h>
 #include "utn.h"
 
-int utn_getInt(char* mensaje,char* mensajeError,int rangoMin, int rangoMax)
+int utn_getInt(int* numero, char* mensaje,char* mensajeError,int rangoMin, int rangoMax)
 {
-    int numero;
+    int ret = -1;
+    int auxNum;
 
     printf("%s",mensaje);
-    scanf("%i",&numero);
+    scanf("%i",&auxNum);
 
-    while(numero<rangoMin || numero>rangoMax)
+    if(numero != NULL)
     {
-        printf("%s",mensajeError);
-        scanf("%i",&numero);
+        while(auxNum<rangoMin || auxNum>rangoMax)
+            {
+                printf("%s",mensajeError);
+                scanf("%i",&auxNum);
+            }
+        *numero = auxNum;
+        ret = 0;
     }
-    return numero;
+
+    return ret;
 }
 
 char utn_getChar(char* mensaje,char* mensajeError,char letra1, char letra2)
@@ -34,17 +41,24 @@ char utn_getChar(char* mensaje,char* mensajeError,char letra1, char letra2)
     return sexo;
 }
 
-float utn_getFloat(char* mensaje,char* mensajeError,float rangoMin, float rangoMax)
+float utn_getFloat(float* numero, char* mensaje,char* mensajeError,float rangoMin, float rangoMax)
 {
-    float numero;
+    int ret = -1;
+    float auxNum;
 
-    printf("%s",mensaje);
-    scanf("%f",&numero);
-
-    while(numero<rangoMin || numero>rangoMax)
+    if(numero != NULL)
     {
-        printf("%s",mensajeError);
-        scanf("%f",&numero);
+        printf("%s",mensaje);
+        scanf("%f",&auxNum);
+
+        while(auxNum<rangoMin || auxNum>rangoMax)
+        {
+            printf("%s",mensajeError);
+            scanf("%f",&auxNum);
+        }
+        *numero = auxNum;
+        ret = 0;
     }
-    return numero;
+
+    return ret;
 }

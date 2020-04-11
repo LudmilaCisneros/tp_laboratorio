@@ -4,6 +4,11 @@
 #include "Funtions.h"
 #include <limits.h>
 
+/** \brief Despliega un menu de opciones.
+ * \param void
+ * \return -1 si esta mal, 0 si esta ok
+ *
+ */
 void abrirMenu()
 {
     int option;
@@ -15,118 +20,186 @@ void abrirMenu()
     int pSuma;
     int pResta;
     int pMultiplica;
+    int pDivide;
 
     do
     {
         printf("\n1. Ingresar 1er operando (A=x)");
         printf("\n2. Ingresar 2do operando (B=y)");
-        printf("\n3. Calcular todas las operaciones\na) Calcular la suma (A+B)\nb) Calcular la resta (A-B)\nc) Calcular la division (A/B)\nd) Calcular la multiplicacion (A*B)\ne) Calcular el factorial (A!)");
-        printf("\n4. Informar resultados\na) “El resultado de A+B es: r”\nb) “El resultado de A-B es: r”\nc) “El resultado de A/B es: r” o “No es posible dividir por cero”\nd) “El resultado de A*B es: r”\ne) “El factorial de A es: r1 y El factorial de B es: r2”");
+        printf("\n3. Calcular todas las operaciones\n a) Calcular la suma (A+B)\n b) Calcular la resta (A-B)\n c) Calcular la division (A/B)\n d) Calcular la multiplicacion (A*B)\n e) Calcular el factorial (A!)");
+        printf("\n4. Informar resultados\n a) El resultado de A+B es: r\n b) El resultado de A-B es: r\n c) El resultado de A/B es: r o No es posible dividir por cero\n d) El resultado de A*B es: r\n e) El factorial de A es: r1 y El factorial de B es: r2");
         printf("\n5. Salir");
 
-        option = utn_getInt("\nIngrese la option: ","\nError, Reingrese: ",1,6);
+        utn_getInt(&option,"\n\n»Ingrese la opcion: ","\n|||Error, Reingrese: ||| ",1,6);
 
         switch(option)
         {
         case 1://Pedir numero1
-            if((numero1 = utn_getInt("\nIngrese el primer numero: ","Error, Reingrese: ",0,INT_MAX) == 0))
+            if((utn_getInt(&numero1,"\n»Ingrese el primer numero: ","|||Error, Reingrese: |||",0,INT_MAX) == 0))
             {
+                printf("\n\n|||Se cargo el primer numero exitosamente.|||\n\n");
                 flag1 = 1;
             }
             break;
 
         case 2://Pedir numero2
-            if(flag1==1)
+            if(flag1 == 1)
             {
-                if((numero2 = utn_getInt("\nIngrese el segundo numero: ","Error, Reingrese: ",0,INT_MAX) == 0))
+                if((utn_getInt(&numero2, "\n»Ingrese el segundo numero: ","|||Error, Reingrese: |||",0,INT_MAX) == 0))
                 {
-                    flag2=1;
+                    printf("\n\n|||Se cargo el segundo numero exitosamente.|||\n\n");
+                    flag2 = 1;
                 }
             }
             else
             {
-                printf("\n Error, No se cargo el numero 1.");
+                printf("\n\n|||Error, No se cargo el numero 1.\n\n|||");
             }
             break;
 
         case 3://Calcular todas las operaciones
             if(flag1 == 1 && flag2 == 1)
             {
-                sumar(&pSuma,numero1,numero2);
-                restar(&pResta,numero1,numero2);
-                multiplicar(&pMultiplica,numero1,numero2);
+                if((sumar(&pSuma,numero1,numero2)==0 &&
+                        restar(&pResta,numero1,numero2)==0 &&
+                        multiplicar(&pMultiplica,numero1,numero2)==0) &&
+                        dividir(&pDivide, numero1, numero2)==0)
+                {
+                    printf("\n\n|||Calculando...|||\n\n");
+                    flag3 = 1;
+                }
+                else
+                {
+                    printf("\n\n||||Error|||\n\n");
+                }
             }
             else
             {
-                printf("No ingreso los dos numeros para operar.");
+                printf("\n\n|||No ingreso los dos numeros para operar.|||\n\n");
             }
             break;
 
         case 4://Informar resultados
             if(flag1 == 1 && flag2 == 1 && flag3 == 1)
             {
-                printf("\nEl resultado de la suma es: %d",pSuma);
-                printf("\nEl resultado de la resta es: %d",pResta);
-                printf("\nEl resultado de la multiplicacion es: %d",pMultiplica);
+                printf("\n\n»El resultado de la suma es: %d",pSuma);
+                printf("\n»El resultado de la resta es: %d",pResta);
+                printf("\n»El resultado de la multiplicacion es: %d",pMultiplica);
+                printf("\n»El resultado de la division es: %d\n\n",pDivide);
             }
             else
             {
-                printf("No ingreso los dos numeros para operar o no calculo todavia.");
+                printf("\n\n|||No ingreso los dos numeros para operar o no calculo todavia.|||\n\n");
             }
             break;
 
         case 5://Salir
+                printf("\n\n|||Saliendo...|||\n\n");
             break;
 
         default:
-            printf("ERROR, opcion inexistente");
+            printf("\n\n|||ERROR, opcion inexistente|||\n\n");
 
         }
     }
     while(option != 5);
 
-    int sumar(int* pSuma, int numero1, int numero2)
-    {
-        int ret = -1;
-        int auxResultado;
-
-        if(pSuma  != NULL )
-        {
-            auxResultado = (numero1 + numero2);
-            *pSuma = auxResultado;
-            ret = 0;
-        }
-
-        return ret;
-    }
-
-    int restar(int* pResta, int numero1, int numero2)
-    {
-        int ret = -1;
-        int auxResultado;
-
-        if(pResta  != NULL )
-        {
-            auxResultado = (numero1 - numero2);
-            *pResta = auxResultado;
-            ret = 0;
-        }
-
-        return ret;
-    }
-
-    int multiplicar(int* pMultiplica, int numero1, int numero2)
-    {
-        int ret = -1;
-        int auxResultado;
-
-        if(pMultiplica  != NULL )
-        {
-            auxResultado = (numero1 * numero2);
-            *pMultiplica = auxResultado;
-            ret = 0;
-        }
-
-        return ret;
-    }
 }
+
+/** \brief Suma dos numeros que recibe.
+ * \param int* pSuma en donde guardaremos el resultado de la suma.
+ * \param numero1
+ * \param numero2
+ * \return -1 si esta mal, 0 si esta ok.
+ *
+ */
+int sumar(int* pSuma, int numero1, int numero2)
+{
+    int ret = -1;
+    int auxResultado;
+
+    if(pSuma  != NULL )
+    {
+        auxResultado = (numero1 + numero2);
+        *pSuma = auxResultado;
+        ret = 0;
+    }
+
+    return ret;
+}
+
+/** \brief Resta dos numeros que recibe.
+ * \param int* pResta en donde guardaremos el resultado de la resta.
+ * \param numero1
+ * \param numero2
+ * \return -1 si esta mal, 0 si esta ok.
+ *
+ */
+int restar(int* pResta, int numero1, int numero2)
+{
+    int ret = -1;
+    int auxResultado;
+
+    if(pResta  != NULL )
+    {
+        auxResultado = (numero1 - numero2);
+        *pResta = auxResultado;
+        ret = 0;
+    }
+
+    return ret;
+}
+
+/** \brief Producto de dos numeros que recibe.
+ * \param int* pMultiplica en donde guardaremos el resultado de la multiplicacion.
+ * \param numero1
+ * \param numero2
+ * \return -1 si esta mal, 0 si esta ok.
+ *
+ */
+int multiplicar(int* pMultiplica, int numero1, int numero2)
+{
+    int ret = -1;
+    int auxResultado;
+
+    if(pMultiplica  != NULL )
+    {
+        auxResultado = (numero1 * numero2);
+        *pMultiplica = auxResultado;
+        ret = 0;
+    }
+
+    return ret;
+}
+
+/** \brief Producto de dos numeros que recibe.
+ * \param int* pMultiplica en donde guardaremos el resultado de la multiplicacion.
+ * \param numero1
+ * \param numero2
+ * \return -1 si esta mal, 0 si esta ok.
+ *
+ */
+int dividir(int* pDivide, int numero1, int numero2)
+{
+    int ret = -1;
+    int auxResultado;
+
+    if(pDivide  != NULL )
+    {
+        if(numero2 == 0)
+        {
+            printf("\nNo es posible dividir por cero");
+
+        }
+        else
+        {
+            auxResultado = (numero1 / numero2);
+            *pDivide = auxResultado;
+            ret = 0;
+        }
+
+    }
+
+    return ret;
+}
+

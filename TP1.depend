@@ -1,14 +1,14 @@
 # depslib dependency file v1.0
-1586584202 source:c:\users\ludmi\onedrive\desktop\tps\tp1\funtions.c
+1586648053 source:c:\users\ludmi\onedrive\desktop\tps\tp1\funtions.c
 	<stdio.h>
 	<stdlib.h>
-	"Funtions.h"
 	"utn.h"
+	"Funtions.h"
 	<limits.h>
 
-1586582862 c:\users\ludmi\onedrive\desktop\tps\tp1\funtions.h
+1586646982 c:\users\ludmi\onedrive\desktop\tps\tp1\funtions.h
 
-1586580351 c:\users\ludmi\onedrive\desktop\tps\tp1\utn.h
+1586644611 c:\users\ludmi\onedrive\desktop\tps\tp1\utn.h
 
 1586581114 source:c:\users\ludmi\onedrive\desktop\tps\tp1\main.c
 	<stdio.h>
@@ -16,7 +16,7 @@
 	"utn.h"
 	"Funtions.h"
 
-1586580845 source:c:\users\ludmi\onedrive\desktop\tps\tp1\utn.c
+1586644760 source:c:\users\ludmi\onedrive\desktop\tps\tp1\utn.c
 	<stdio.h>
 	<stdlib.h>
 	"utn.h"
