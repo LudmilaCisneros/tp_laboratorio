@@ -21,6 +21,8 @@ void abrirMenu()
     int pResta;
     int pMultiplica;
     int pDivide;
+    double pFactorial1;
+    double pFactorial2;
 
     do
     {
@@ -64,7 +66,8 @@ void abrirMenu()
                 if((sumar(&pSuma,numero1,numero2)==0 &&
                         restar(&pResta,numero1,numero2)==0 &&
                         multiplicar(&pMultiplica,numero1,numero2)==0) &&
-                        dividir(&pDivide, numero1, numero2)==0)
+                        dividir(&pDivide, numero1, numero2)==0 &&
+                        getFactorial(&pFactorial1,numero1) && getFactorial(&pFactorial2,numero2))
                 {
                     printf("\n\n|||Calculando...|||\n\n");
                     flag3 = 1;
@@ -87,6 +90,7 @@ void abrirMenu()
                 printf("\n틿l resultado de la resta es: %d",pResta);
                 printf("\n틿l resultado de la multiplicacion es: %d",pMultiplica);
                 printf("\n틿l resultado de la division es: %d\n\n",pDivide);
+                printf("\n틿l resultado del factorial1 es: %.2f y factorial2: %.2f",pFactorial1,pFactorial2);
             }
             else
             {
@@ -203,4 +207,5 @@ int dividir(int* pDivide, int numero1, int numero2)
 
     return ret;
 }
+
 
