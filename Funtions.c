@@ -31,6 +31,7 @@ void abrirMenu()
         printf("\n5. Salir");
 
         utn_getInt(&option,"\n\n»Ingrese la opcion: ","\n|||Error, Reingrese: ||| ",1,6);
+        system("cls");
 
         switch(option)
         {
