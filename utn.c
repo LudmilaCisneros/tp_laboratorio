@@ -90,7 +90,7 @@ float utn_getFloat(float* numero, char* mensaje,char* mensajeError,float rangoMi
 int getFactorial(double* pFactorial, int numero)
 {
     int ret = -1;
-    double auxDouble;
+    double auxDouble = 1;
     int i;
 
     if(pFactorial != NULL)
@@ -98,6 +98,7 @@ int getFactorial(double* pFactorial, int numero)
         if (numero == 1 || numero == 0)
         {
             auxDouble = 1;
+            ret = 0;
         }
         else
         {

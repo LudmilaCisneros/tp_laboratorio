@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "utn.h"
-#include "Funtions.h"
+#include "Functions.h"
 #include <limits.h>
 
 /** \brief Despliega un menu de opciones.
@@ -67,7 +67,7 @@ void abrirMenu()
                         restar(&pResta,numero1,numero2)==0 &&
                         multiplicar(&pMultiplica,numero1,numero2)==0) &&
                         dividir(&pDivide, numero1, numero2)==0 &&
-                        getFactorial(&pFactorial1,numero1) && getFactorial(&pFactorial2,numero2))
+                        getFactorial(&pFactorial1,numero1)==0 && getFactorial(&pFactorial2,numero2)==0)
                 {
                     printf("\n\n|||Calculando...|||\n\n");
                     flag3 = 1;
@@ -89,8 +89,8 @@ void abrirMenu()
                 printf("\n\n틿l resultado de la suma es: %d",pSuma);
                 printf("\n틿l resultado de la resta es: %d",pResta);
                 printf("\n틿l resultado de la multiplicacion es: %d",pMultiplica);
-                printf("\n틿l resultado de la division es: %d\n\n",pDivide);
-                printf("\n틿l resultado del factorial1 es: %.2f y factorial2: %.2f",pFactorial1,pFactorial2);
+                printf("\n틿l resultado de la division es: %d",pDivide);
+                printf("\n틿l resultado del factorial1 es: %.0f y factorial2: %.0f\n\n",pFactorial1,pFactorial2);
             }
             else
             {

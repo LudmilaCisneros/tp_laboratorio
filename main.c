@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "utn.h"
-#include "Funtions.h"
+#include "Functions.h"
 
 int main()
 {
