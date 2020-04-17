@@ -26,8 +26,22 @@ void abrirMenu()
 
     do
     {
-        printf("\n1. Ingresar 1er operando (A=x)");
-        printf("\n2. Ingresar 2do operando (B=y)");
+        if(flag1 == 1)
+        {
+            printf("\n1. Ingresar 1er operando (A=%d)",numero1);
+        }
+        else{
+             printf("\n1. Ingresar 1er operando (A=x)");
+        }
+
+        if(flag2 == 1)
+        {
+            printf("\n2. Ingresar 2do operando (B=%d)",numero2);
+        }
+        else{
+             printf("\n2. Ingresar 2do operando (B=y)");
+        }
+
         printf("\n3. Calcular todas las operaciones\n a) Calcular la suma (A+B)\n b) Calcular la resta (A-B)\n c) Calcular la division (A/B)\n d) Calcular la multiplicacion (A*B)\n e) Calcular el factorial (A!)");
         printf("\n4. Informar resultados\n a) El resultado de A+B es: r\n b) El resultado de A-B es: r\n c) El resultado de A/B es: r o No es posible dividir por cero\n d) El resultado de A*B es: r\n e) El factorial de A es: r1 y El factorial de B es: r2");
         printf("\n5. Salir");
@@ -37,7 +51,7 @@ void abrirMenu()
 
         switch(option)
         {
-        case 1://Pedir numero1
+        case 1:
             if((utn_getInt(&numero1,"\n»Ingrese el primer numero: ","|||Error, Reingrese: |||",0,INT_MAX) == 0))
             {
                 printf("\n\n|||Se cargo el primer numero exitosamente.|||\n\n");
@@ -45,7 +59,7 @@ void abrirMenu()
             }
             break;
 
-        case 2://Pedir numero2
+        case 2:
             if(flag1 == 1)
             {
                 if((utn_getInt(&numero2, "\n»Ingrese el segundo numero: ","|||Error, Reingrese: |||",0,INT_MAX) == 0))
@@ -60,7 +74,7 @@ void abrirMenu()
             }
             break;
 
-        case 3://Calcular todas las operaciones
+        case 3:
             if(flag1 == 1 && flag2 == 1)
             {
                 if((sumar(&pSuma,numero1,numero2)==0 &&
@@ -83,7 +97,7 @@ void abrirMenu()
             }
             break;
 
-        case 4://Informar resultados
+        case 4:
             if(flag1 == 1 && flag2 == 1 && flag3 == 1)
             {
                 printf("\n\n»El resultado de la suma es: %d",pSuma);
@@ -98,7 +112,7 @@ void abrirMenu()
             }
             break;
 
-        case 5://Salir
+        case 5:
                 printf("\n\n|||Saliendo...|||\n\n");
             break;
 

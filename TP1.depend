@@ -30,3 +30,25 @@
 
 1586646982 c:\users\ludmi\onedrive\desktop\tps\tp1\functions.h
 
+1587084905 source:c:\users\lu\desktop\tps\tp1\functions.c
+	<stdio.h>
+	<stdlib.h>
+	"utn.h"
+	"Functions.h"
+	<limits.h>
+
+1586729903 c:\users\lu\desktop\tps\tp1\utn.h
+
+1586646982 c:\users\lu\desktop\tps\tp1\functions.h
+
+1586789845 source:c:\users\lu\desktop\tps\tp1\main.c
+	<stdio.h>
+	<stdlib.h>
+	"utn.h"
+	"Functions.h"
+
+1586789209 source:c:\users\lu\desktop\tps\tp1\utn.c
+	<stdio.h>
+	<stdlib.h>
+	"utn.h"
+
