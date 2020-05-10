@@ -21,3 +21,29 @@
 	<string.h>
 	"utn.h"
 
+1589074589 source:c:\users\ludmi\onedrive\desktop\tps\tp_laboratorio_1\tp2\arrayemployees.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<limits.h>
+	<float.h>
+	"ArrayEmployees.h"
+	"utn.h"
+
+1589073097 c:\users\ludmi\onedrive\desktop\tps\tp_laboratorio_1\tp2\arrayemployees.h
+
+1589068646 c:\users\ludmi\onedrive\desktop\tps\tp_laboratorio_1\tp2\utn.h
+
+1589068964 source:c:\users\ludmi\onedrive\desktop\tps\tp_laboratorio_1\tp2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+	"ArrayEmployees.h"
+
+1589068646 source:c:\users\ludmi\onedrive\desktop\tps\tp_laboratorio_1\tp2\utn.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+

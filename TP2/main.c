@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "utn.h"
 #include "ArrayEmployees.h"
 
@@ -39,11 +40,11 @@ int main()
         case 2:
             if(flag1)
             {
-                //MODIFICAR
+                modificarEmpleado(listEmployees, QTY_EMPLOYEES);
             }
             else
             {
-                printf("No se ha cargado empleados");
+                printf("\nNo se ha cargado empleados");
             }
             break;
 
@@ -54,7 +55,7 @@ int main()
             }
             else
             {
-                printf("No se ha cargado empleados");
+                printf("\nNo se ha cargado empleados");
             }
             break;
 

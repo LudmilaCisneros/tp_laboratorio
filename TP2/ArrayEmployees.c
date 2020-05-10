@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -49,7 +50,7 @@ int initEmployees(sEmployee listEmployees[], int len)
 /** \brief Busca un lugar libre en el array de lista empleados
  * \param recibe el array empleados
  * \param recibe el len
- * \return (-1) En caso de error. (0) si esta ok.
+ * \return (-1) En caso de error. (index) si esta ok.
  *
  */
 int buscarLibre(sEmployee listEmployees[], int len)
@@ -80,10 +81,11 @@ int buscarLibre(sEmployee listEmployees[], int len)
  * \return (-1) En caso de error. (0) si esta ok.
  *
  */
-int altaUnEmpleado(sEmployee listEmployees[], int len)
+int addEmployees(sEmployee listEmployees[], int len, int id, char* name, char* lastName, float salary, int sector)
 {
     int ret = -1;
     int index;
+
 
     if(listEmployees != NULL && len >= 0)
     {
@@ -91,14 +93,13 @@ int altaUnEmpleado(sEmployee listEmployees[], int len)
 
         if(index != -1)
         {
-            utn_getString(listEmployees[index].name,"\nIngrese el nombre: ","\nError",3,51,3);
-            utn_getString(listEmployees[index].lastName,"\nIngrese el apellido: ","\nError",3,51,3);
-            utn_getFloat(&listEmployees[index].salary,"\nIngrese el salario: ","\nError",0,FLT_MAX);
-            utn_getInt(&listEmployees[index].sector,"\nIngrese el sector: ","\nError",0,INT_MAX);
+            strncpy(listEmployees[index].name,name,sizeof(listEmployees[index].name));
+            strncpy(listEmployees[index].lastName,lastName,sizeof(listEmployees[index].lastName));
+            listEmployees[index].salary = salary;
+            listEmployees[index].sector = sector;
             listEmployees[index].isEmpty = 1;
             listEmployees[index].id = autoIncrementId();
         }
-
         ret = 0;
     }
 
@@ -115,17 +116,26 @@ int altaEmpleados(sEmployee listEmployees[], int len)
     int ret = -1;
     int i;
     char respuesta;
+    char name[51];
+    char lastName[51];
+    float salary;
+    int sector;
 
     if(listEmployees != NULL && len >= 0)
     {
         for(i=0;i<len;i++)
         {
-            if(altaUnEmpleado(listEmployees,len) == 0)
+            utn_getString(name,"\nIngrese el nombre: ","\nError",3,51,3);
+            utn_getString(lastName,"\nIngrese el apellido: ","\nError",3,51,3);
+            utn_getFloat(&salary,"\nIngrese el salario: ","\nError",0,FLT_MAX);
+            utn_getInt(&sector,"\nIngrese el sector: ","\nError",0,INT_MAX);
+
+            if(addEmployees(listEmployees,len,id,name,lastName,salary,sector) == 0)
             {
                 printf("\nAlta Exitosa");
             }
 
-            respuesta = utn_getChar("\n¿Quiere continuar cargando altas?: ","\nError",'n','s');
+            respuesta = utn_getChar("\n¿Quiere continuar cargando altas? (s/n):","\nError",'n','s');
             if(respuesta == 'n')
             {
                 break;
@@ -135,5 +145,76 @@ int altaEmpleados(sEmployee listEmployees[], int len)
     }
     return ret;
 }
+
+/** \brief busca el id pasado por parametro
+ * \param listEmployees[]
+ * \param len int
+ * \param id int
+ * \return (-1) En caso de error. (index) si esta ok.
+ *
+ */
+int findEmployeeById(sEmployee listEmployees[], int len, int id)
+{
+    int index = -1;
+    int i;
+
+    if(listEmployees != NULL && len >= 0)
+    {
+        for(i=0;i<len;i++)
+        {
+            if(id == i && listEmployees[i].isEmpty == 1)
+            {
+                index = i;
+                break;
+            }
+        }
+
+        if(index == -1)
+        {
+            printf("No existe ese empleado");
+        }
+    }
+
+    return index;
+}
+
+/** \brief Modifica algun campo de un empleado
+ * \param la lista de empleados
+ * \param el largo de la lista
+ * \return (-1) En caso de error. (0) si esta ok
+ *
+ */
+int modificarEmpleado(sEmployee listEmployees[], int len)
+{
+    int ret = -1;
+    int idAux;
+    int index;
+
+    if(listEmployees != NULL && len >= 0)
+    {
+        //mostrarEmpleados();
+        utn_getInt(&idAux,"\nIngrese el id: ","\nError",0,1000);
+        index = findEmployeeById(listEmployees,len,idAux);
+
+        utn_getString(listEmployees[index].name,"\nIngrese el nombre: ","\nError",3,51,3);
+        utn_getString(listEmployees[index].lastName,"\nIngrese el apellido: ","\nError",3,51,3);
+        utn_getFloat(&listEmployees[index].salary,"\nIngrese el salario: ","\nError",0,FLT_MAX);
+        utn_getInt(&listEmployees[index].sector,"\nIngrese el sector: ","\nError",0,INT_MAX);
+        ret = 0;
+    }
+
+    return ret;
+}
+
+/** \brief Elimina de manera logica un empleado
+ * \param la lista de empleados
+ * \param el tama;o del array
+ * \return (-1) En caso de error. (0) si esta ok.
+ *
+ */
+
+
+
+
 
 
