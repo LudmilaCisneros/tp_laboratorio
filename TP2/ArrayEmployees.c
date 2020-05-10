@@ -212,6 +212,44 @@ int modificarEmpleado(sEmployee listEmployees[], int len)
  * \return (-1) En caso de error. (0) si esta ok.
  *
  */
+int removeEmployee(sEmployee listEmployees[], int len, int id)
+{
+    int ret = -1;
+    int index;
+
+    if(listEmployees != NULL && len >= 0)
+       {
+         index = findEmployeeById(listEmployees, len, id);
+         listEmployees[index].isEmpty = 0;
+         ret = 0;
+       }
+
+    return ret;
+}
+
+/** \brief Elimina un empleado
+ * \param listEmployees[]
+ * \param len
+ * \return (-1) En caso de error. (0) si esta ok.
+ *
+ */
+int borrarEmpleado(sEmployee listEmployees[], int len)
+{
+    int ret = -1;
+    int idAux;
+
+    if(listEmployees != NULL && len >= 0)
+    {
+        //mostrarEmpleados
+        utn_getInt(&idAux,"\nIngrese el id: ","\nError",0,1000);
+        if(removeEmployee(listEmployees,len,idAux) == 0)
+        {
+            ret = 0;
+        }
+
+    }
+    return ret;
+}
 
 
 

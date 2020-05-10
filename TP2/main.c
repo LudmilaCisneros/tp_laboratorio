@@ -44,18 +44,18 @@ int main()
             }
             else
             {
-                printf("\nNo se ha cargado empleados");
+                printf("\nNo se han cargado empleados\n");
             }
             break;
 
         case 3:
             if(flag1)
             {
-                //BAJA
+                borrarEmpleado(listEmployees, QTY_EMPLOYEES);
             }
             else
             {
-                printf("\nNo se ha cargado empleados");
+                printf("\nNo se han cargado empleados\n");
             }
             break;
 
@@ -80,7 +80,9 @@ int main()
                         printf("\nOpcion Inexistente");
                         break;
                 }
-
+            }
+            else{
+                printf("\nNo se han cargado empleados\n");
             }
             break;
 
