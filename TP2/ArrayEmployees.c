@@ -47,6 +47,62 @@ int initEmployees(sEmployee listEmployees[], int len)
 
     return ret;
 }
+
+/** \brief Muestra todos los empleados
+ * \param listEmployees
+ * \param int len
+ * \return int return En caso de que no haya empleados, el array apunte a NULL o el len sea menor a 0 (-1) o (0) si esta ok.
+ *
+ */
+int mostrarTodosLosEmpleados(sEmployee listEmployees[], int len)
+{
+    int ret = -1;
+
+    int i;
+
+    if(listEmployees != NULL && len >= 0)
+    {
+        for(i=0;i<len;i++)
+        {
+            if(mostrarUnEmpleado(listEmployees,len,i) == 0)
+            {
+                ret = 0;
+            }
+        }
+        if(ret == -1)
+        {
+            printf("\nNo hay empleados cargados\n");
+        }
+    }
+    return ret;
+}
+
+/** \brief Muestra un empleado
+ * \param listEmployees
+ * \param int len
+ * \return int return (-1) En caso de error. (0) si esta ok.
+ *
+ */
+int mostrarUnEmpleado(sEmployee listEmployees[], int len, int index)
+{
+    int ret = -1;
+
+    if(listEmployees != NULL)
+    {
+        if(listEmployees[index].isEmpty == 1)
+        {
+            printf("\nId: %d\nNombre: %s\nApellido: %s\nSalario: %.2f\nSector: %d\n",listEmployees[index].id,
+                                                                                     listEmployees[index].name,
+                                                                                     listEmployees[index].lastName,
+                                                                                     listEmployees[index].salary,
+                                                                                     listEmployees[index].sector);
+            ret = 0;
+        }
+
+    }
+    return ret;
+}
+
 /** \brief Busca un lugar libre en el array de lista empleados
  * \param recibe el array empleados
  * \param recibe el len
@@ -125,17 +181,17 @@ int altaEmpleados(sEmployee listEmployees[], int len)
     {
         for(i=0;i<len;i++)
         {
-            utn_getString(name,"\nIngrese el nombre: ","\nError",3,51,3);
-            utn_getString(lastName,"\nIngrese el apellido: ","\nError",3,51,3);
-            utn_getFloat(&salary,"\nIngrese el salario: ","\nError",0,FLT_MAX);
-            utn_getInt(&sector,"\nIngrese el sector: ","\nError",0,INT_MAX);
+            utn_getString(name,"\nIngrese el nombre: ","\nError, reingrese: ",3,51,3);
+            utn_getString(lastName,"\nIngrese el apellido: ","\nError, reingrese: ",3,51,3);
+            utn_getFloat(&salary,"\nIngrese el salario: ","\nError, reingrese: ",0,FLT_MAX);
+            utn_getInt(&sector,"\nIngrese el sector: ","\nError, reingrese: ",0,INT_MAX);
 
             if(addEmployees(listEmployees,len,id,name,lastName,salary,sector) == 0)
             {
                 printf("\nAlta Exitosa");
             }
 
-            respuesta = utn_getChar("\n¿Quiere continuar cargando altas? (s/n):","\nError",'n','s');
+            respuesta = utn_getChar("\n¿Quiere continuar cargando altas? (s/n): ","\nError, reingrese: ",'n','s');
             if(respuesta == 'n')
             {
                 break;
@@ -162,7 +218,7 @@ int findEmployeeById(sEmployee listEmployees[], int len, int id)
     {
         for(i=0;i<len;i++)
         {
-            if(id == i && listEmployees[i].isEmpty == 1)
+            if(id == listEmployees[i].id && listEmployees[i].isEmpty == 1)
             {
                 index = i;
                 break;
@@ -171,7 +227,7 @@ int findEmployeeById(sEmployee listEmployees[], int len, int id)
 
         if(index == -1)
         {
-            printf("No existe ese empleado");
+            printf("\nNo existe ese empleado");
         }
     }
 
@@ -192,15 +248,23 @@ int modificarEmpleado(sEmployee listEmployees[], int len)
 
     if(listEmployees != NULL && len >= 0)
     {
-        //mostrarEmpleados();
-        utn_getInt(&idAux,"\nIngrese el id: ","\nError",0,1000);
-        index = findEmployeeById(listEmployees,len,idAux);
+        if(mostrarTodosLosEmpleados(listEmployees,len) == 0)
+        {
+            utn_getInt(&idAux,"\nIngrese el id: ","\nError, reingrese: ",0,1000);
+            index = findEmployeeById(listEmployees,len,idAux);
 
-        utn_getString(listEmployees[index].name,"\nIngrese el nombre: ","\nError",3,51,3);
-        utn_getString(listEmployees[index].lastName,"\nIngrese el apellido: ","\nError",3,51,3);
-        utn_getFloat(&listEmployees[index].salary,"\nIngrese el salario: ","\nError",0,FLT_MAX);
-        utn_getInt(&listEmployees[index].sector,"\nIngrese el sector: ","\nError",0,INT_MAX);
-        ret = 0;
+            if(index != -1)
+            {
+                utn_getString(listEmployees[index].name,"\nIngrese el nombre: ","\nError, reingrese: ",3,51,3);
+                utn_getString(listEmployees[index].lastName,"\nIngrese el apellido: ","\nError, reingrese: ",3,51,3);
+                utn_getFloat(&listEmployees[index].salary,"\nIngrese el salario: ","\nError, reingrese: ",0,FLT_MAX);
+                utn_getInt(&listEmployees[index].sector,"\nIngrese el sector: ","\nError, reingrese: ",0,INT_MAX);
+                printf("\nEmpleado modificado exitosamente\n");
+                ret = 0;
+            }
+
+        }
+
     }
 
     return ret;
@@ -240,12 +304,16 @@ int borrarEmpleado(sEmployee listEmployees[], int len)
 
     if(listEmployees != NULL && len >= 0)
     {
-        //mostrarEmpleados
-        utn_getInt(&idAux,"\nIngrese el id: ","\nError",0,1000);
-        if(removeEmployee(listEmployees,len,idAux) == 0)
+        if(mostrarTodosLosEmpleados(listEmployees,len) == 0)
         {
-            ret = 0;
+            utn_getInt(&idAux,"\nIngrese el id: ","\nError, reingrese: ",0,1000);
+            if(removeEmployee(listEmployees,len,idAux) == 0)
+            {
+                printf("\nEmpleado eliminado exitosamente\n");
+                ret = 0;
+            }
         }
+
 
     }
     return ret;

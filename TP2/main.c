@@ -26,7 +26,7 @@ int main()
         printf("\n 1.LISTADO DE LOS EMPLEADOS ORDENADOS ALFABETICAMENTE POR APELLIDO Y SECTOR");
         printf("\n 1.TOTAL Y PROMEDIO DE LOS SALARIOS, Y CUANTOS EMPLEADOS SUPERAN EL SALARIO PROMEDIO");
         printf("\n5.SALIR\n");
-        utn_getInt(&option,"\nIngrese la opcion: ","\nERROR",0,7);
+        utn_getInt(&option,"\nIngrese la opcion: ","\nError, reingrese: ",0,7);
 
         switch(option)
         {
@@ -65,7 +65,7 @@ int main()
                 printf("\n 1.LISTADO DE LOS EMPLEADOS ORDENADOS ALFABETICAMENTE POR APELLIDO Y SECTOR");
                 printf("\n 1.TOTAL Y PROMEDIO DE LOS SALARIOS, Y CUANTOS EMPLEADOS SUPERAN EL SALARIO PROMEDIO");
 
-                utn_getInt(&subOption,"\nIngrese la opcion: ","\nError",0,3);
+                utn_getInt(&subOption,"\nIngrese la opcion: ","\nError, reingrese: ",0,3);
                 switch(subOption)
                 {
                     case 1:
