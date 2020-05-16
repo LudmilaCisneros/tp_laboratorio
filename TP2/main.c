@@ -5,7 +5,7 @@
 #include "ArrayEmployees.h"
 
 
-#define QTY_EMPLOYEES 1000
+#define QTY_EMPLOYEES 5
 
 int main()
 {
@@ -14,6 +14,7 @@ int main()
     int option;
     int subOption;
     int flag1 = 0;
+    int order;
 
     initEmployees(listEmployees, QTY_EMPLOYEES);
 
@@ -31,7 +32,7 @@ int main()
         switch(option)
         {
         case 1:
-            if(altaEmpleados(listEmployees,QTY_EMPLOYEES) == 0)
+            if(altaEmpleados(listEmployees,QTY_EMPLOYEES) == 0)/*if(hardcodeoEmployees(listEmployees, QTY_EMPLOYEES) == 0)*/
             {
                 flag1 = 1;
             }
@@ -63,17 +64,19 @@ int main()
             if(flag1)
             {
                 printf("\n 1.LISTADO DE LOS EMPLEADOS ORDENADOS ALFABETICAMENTE POR APELLIDO Y SECTOR");
-                printf("\n 1.TOTAL Y PROMEDIO DE LOS SALARIOS, Y CUANTOS EMPLEADOS SUPERAN EL SALARIO PROMEDIO");
+                printf("\n 2.TOTAL Y PROMEDIO DE LOS SALARIOS, Y CUANTOS EMPLEADOS SUPERAN EL SALARIO PROMEDIO");
 
                 utn_getInt(&subOption,"\nIngrese la opcion: ","\nError, reingrese: ",0,3);
                 switch(subOption)
                 {
                     case 1:
-                    //1.listado de empleados ordenados alfab apellido y sector
+                    utn_getInt(&order,"\n0.Ascendente\n1.Descendente\norden: ","\nError, reingrese: ",0,1);
+                    sortEmployees(listEmployees, QTY_EMPLOYEES, order);
+                    printEmployees(listEmployees, QTY_EMPLOYEES);
                     break;
 
                     case 2:
-                    //2.total y promedio de los salarios , y cuantos empleados superan el salario promedio
+                    totalYPromedioSalariosEmpleados(listEmployees, QTY_EMPLOYEES);
                     break;
 
                     default:

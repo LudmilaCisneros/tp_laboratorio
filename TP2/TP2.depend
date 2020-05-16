@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1589210428 source:c:\users\lu\desktop\tps\tp_laboratorio_1\tp2\arrayemployees.c
+1589609698 source:c:\users\lu\desktop\tps\tp_laboratorio_1\tp2\arrayemployees.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -8,18 +8,18 @@
 	"ArrayEmployees.h"
 	"utn.h"
 
-1589144492 c:\users\lu\desktop\tps\tp_laboratorio_1\tp2\utn.h
+1589607922 c:\users\lu\desktop\tps\tp_laboratorio_1\tp2\utn.h
 
-1589144492 source:c:\users\lu\desktop\tps\tp_laboratorio_1\tp2\main.c
+1589609718 source:c:\users\lu\desktop\tps\tp_laboratorio_1\tp2\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"utn.h"
 	"ArrayEmployees.h"
 
-1589204649 c:\users\lu\desktop\tps\tp_laboratorio_1\tp2\arrayemployees.h
+1589609728 c:\users\lu\desktop\tps\tp_laboratorio_1\tp2\arrayemployees.h
 
-1589144492 source:c:\users\lu\desktop\tps\tp_laboratorio_1\tp2\utn.c
+1589607916 source:c:\users\lu\desktop\tps\tp_laboratorio_1\tp2\utn.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

@@ -159,11 +159,11 @@ int utn_getFactorial(double* pFactorial, int numero)
     return ret;
 }
 
-float sacarPromedio(int numero1, int numero2)
+float utn_sacarPromedio(double total, int contador)
 {
     float resultado;
 
-    resultado = (float)(numero1 + numero2)/2;
+    resultado = (float)(total/contador);
 
     return resultado;
 }

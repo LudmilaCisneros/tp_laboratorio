@@ -7,13 +7,6 @@
 #include "ArrayEmployees.h"
 #include "utn.h"
 
-/*2.1 Función initEmployees
-2.2 Función addEmployees
-2.3 Función findEmployeeById
-2.4 Función removeEmployee
-2.5 Función sortEmployeeByName
-2.6 Función printEmployees*/
-
 /** \brief Genera los ids.
  * \return el proximo id ha utilizar
  */
@@ -25,11 +18,43 @@ static int autoIncrementId(void)
     return id++;
 }
 
+/** \brief Hardcodeo de empleados para pruebas
+ * \param  recibe la lista de empleados
+ * \param recibe el tamaño del array
+ * \return int return En caso de que no haya empleados, el array apunte a NULL o el len sea menor a 0 (-1) o (0) si esta ok.
+
+int hardcodeoEmployees(sEmployee listEmployees[], int len)
+{
+    int ret = -1;
+    int i;
+    int id[5] = {0,1,2,3,4};
+    char name[5][51] = {"matias","pedro","liliana","octavio","julio"};
+    char lastName[5][51] = {"rodriguez","argento","alfonzo","rodriguez","diaz"};
+    float salary[5] = {5000,800,900,5400,6000};
+    int sector[5] = {1,2,3,5,4};
+    int isEmpty[5] = {1,1,1,1,1};
+
+    if(listEmployees != NULL && len >= 0)
+    {
+        for(i=0; i<len; i++)
+        {
+            listEmployees[i].id = id[i];
+            strcpy(listEmployees[i].name, name[i]);
+            strcpy(listEmployees[i].lastName, lastName[i]);
+            listEmployees[i].salary = salary[i];
+            listEmployees[i].sector = sector[i];
+            listEmployees[i].isEmpty = isEmpty[i];
+        }
+        ret = 0;
+    }
+    return ret;
+}*/
+
 /** \brief Para indicar que todas las posiciones del array estan vacias
  *         esta funcion pone la bandera (isEmpty) en TRUE en todas las posiciones del array
  * \param listEmployee[] el array de empleados
  * \param len es el tamaño del array de empleados
- * \return int return (-1) En caso de error. (0) si esta ok.
+ * \return int return En caso de que no haya empleados, el array apunte a NULL o el len sea menor a 0 (-1) o (0) si esta ok.
  */
 int initEmployees(sEmployee listEmployees[], int len)
 {
@@ -52,9 +77,8 @@ int initEmployees(sEmployee listEmployees[], int len)
  * \param listEmployees
  * \param int len
  * \return int return En caso de que no haya empleados, el array apunte a NULL o el len sea menor a 0 (-1) o (0) si esta ok.
- *
  */
-int mostrarTodosLosEmpleados(sEmployee listEmployees[], int len)
+int printEmployees(sEmployee listEmployees[], int len)
 {
     int ret = -1;
 
@@ -64,8 +88,9 @@ int mostrarTodosLosEmpleados(sEmployee listEmployees[], int len)
     {
         for(i=0;i<len;i++)
         {
-            if(mostrarUnEmpleado(listEmployees,len,i) == 0)
+            if(listEmployees[i].isEmpty == 1)
             {
+                mostrarUnEmpleado(listEmployees,len,i);
                 ret = 0;
             }
         }
@@ -89,16 +114,12 @@ int mostrarUnEmpleado(sEmployee listEmployees[], int len, int index)
 
     if(listEmployees != NULL)
     {
-        if(listEmployees[index].isEmpty == 1)
-        {
             printf("\nId: %d\nNombre: %s\nApellido: %s\nSalario: %.2f\nSector: %d\n",listEmployees[index].id,
                                                                                      listEmployees[index].name,
                                                                                      listEmployees[index].lastName,
                                                                                      listEmployees[index].salary,
                                                                                      listEmployees[index].sector);
             ret = 0;
-        }
-
     }
     return ret;
 }
@@ -237,7 +258,7 @@ int findEmployeeById(sEmployee listEmployees[], int len, int id)
 /** \brief Modifica algun campo de un empleado
  * \param la lista de empleados
  * \param el largo de la lista
- * \return (-1) En caso de error. (0) si esta ok
+ * \return (-1) En caso de que el puntero sea NULL o el size sea menor a 0. (0) si esta ok.
  *
  */
 int modificarEmpleado(sEmployee listEmployees[], int len)
@@ -248,7 +269,7 @@ int modificarEmpleado(sEmployee listEmployees[], int len)
 
     if(listEmployees != NULL && len >= 0)
     {
-        if(mostrarTodosLosEmpleados(listEmployees,len) == 0)
+        if(printEmployees(listEmployees,len) == 0)
         {
             utn_getInt(&idAux,"\nIngrese el id: ","\nError, reingrese: ",0,1000);
             index = findEmployeeById(listEmployees,len,idAux);
@@ -273,7 +294,7 @@ int modificarEmpleado(sEmployee listEmployees[], int len)
 /** \brief Elimina de manera logica un empleado
  * \param la lista de empleados
  * \param el tama;o del array
- * \return (-1) En caso de error. (0) si esta ok.
+ * \return (-1) En caso de que el puntero sea NULL o el size sea menor a 0. (0) si esta ok.
  *
  */
 int removeEmployee(sEmployee listEmployees[], int len, int id)
@@ -294,7 +315,7 @@ int removeEmployee(sEmployee listEmployees[], int len, int id)
 /** \brief Elimina un empleado
  * \param listEmployees[]
  * \param len
- * \return (-1) En caso de error. (0) si esta ok.
+ * \return (-1) En caso de que el puntero sea NULL o el size sea menor a 0. (0) si esta ok.
  *
  */
 int borrarEmpleado(sEmployee listEmployees[], int len)
@@ -304,7 +325,7 @@ int borrarEmpleado(sEmployee listEmployees[], int len)
 
     if(listEmployees != NULL && len >= 0)
     {
-        if(mostrarTodosLosEmpleados(listEmployees,len) == 0)
+        if(printEmployees(listEmployees,len) == 0)
         {
             utn_getInt(&idAux,"\nIngrese el id: ","\nError, reingrese: ",0,1000);
             if(removeEmployee(listEmployees,len,idAux) == 0)
@@ -314,10 +335,168 @@ int borrarEmpleado(sEmployee listEmployees[], int len)
             }
         }
 
-
     }
     return ret;
 }
+
+/** \brief swapea 2 empleados
+ * \param listEmployees[]
+ * \param posicion del array i
+ * \return void
+ */
+void swapEmployee(sEmployee listEmployees [], int i)
+{
+    sEmployee auxEmployee;
+
+    auxEmployee = listEmployees[i];
+    listEmployees[i] = listEmployees[i+1];
+    listEmployees[i+1] = auxEmployee;
+
+}
+
+/** \brief Ordena los empleados por apellido y sector, el usuario debe indicar el orden.
+ * \param array empleados
+ * \param tamaño del array
+ * \return (-1) En caso de que el puntero sea NULL o el size sea menor a 0. (0) si esta ok.
+ *
+ */
+int sortEmployees(sEmployee listEmployees[], int len, int order)
+{
+    int ret = -1;
+    int i;
+    int flagSwap;
+
+    if(listEmployees != NULL && len >= 0)
+    {
+        do
+        {
+            flagSwap = 0;
+
+            for(i=0; i<len-1; i++)
+            {
+                if(order == 0 && strcmp(listEmployees[i].lastName, listEmployees[i+1].lastName) > 0)//A-Z
+                {
+                    swapEmployee(listEmployees,i);
+                    flagSwap = 1;
+                }
+                if(order == 1 && strcmp(listEmployees[i].lastName, listEmployees[i+1].lastName) < 0)//Z-A
+                {
+                    swapEmployee(listEmployees,i);
+                    flagSwap = 1;
+                }
+                if(strcmp(listEmployees[i].lastName,listEmployees[i+1].lastName) == 0)
+                {
+                    if(order == 0 && listEmployees[i].sector > listEmployees[i+1].sector)
+                    {
+                        swapEmployee(listEmployees,i);
+                        flagSwap=1;
+                    }
+                    if(order == 1 && listEmployees[i].sector < listEmployees[i+1].sector)
+                    {
+                        swapEmployee(listEmployees,i);
+                        flagSwap=1;
+                    }
+                }
+            }
+
+        } while(flagSwap);
+
+        ret = 0;
+    }
+
+    return ret;
+}
+
+//total y promedio de los salarios, y cuantos empleados superan el salario promedio
+/** \brief Encuentra la cantidad de empleados que hay cargados
+ * \param array empleados
+ * \param len
+ * \return (-1) En caso de que el puntero sea NULL o el size sea menor a 0. La cantidad de empleados si esta ok.
+ */
+int cantidadEmpleados(sEmployee listEmployees[], int len)
+{
+    int ret = -1;
+    int i;
+    int cantidadEmpleados = 0;
+
+    if(listEmployees != NULL && len >= 0)
+    {
+        for(i=0;i<len;i++)
+        {
+            if(listEmployees[i].isEmpty == 1)
+            {
+                cantidadEmpleados++;
+            }
+        }
+        ret = cantidadEmpleados;
+    }
+
+    return ret;
+}
+/** \brief Obtiene la cantidad de empleados que superan el promedio de salarios
+ * \param array empleados
+ * \param len
+ * \return (-1) En caso de que el puntero sea NULL o el size sea menor a 0. si esta ok la cantidad de empleados que superan el promedio de salarios
+ *
+ */
+int cantidadEmpleadosQueSuperanElPromedio(sEmployee listEmployees[], int len, float promedioSalarios)
+{
+    int ret = -1;
+    int i;
+    int cantidadSuperanPromedio = 0;
+
+    if(listEmployees != NULL && len >= 0)
+    {
+        for(i=0;i<len;i++)
+        {
+            if(listEmployees[i].isEmpty == 1 && listEmployees[i].salary > promedioSalarios)
+            {
+                cantidadSuperanPromedio++;
+            }
+        }
+        ret = cantidadSuperanPromedio;
+    }
+    return ret;
+}
+
+/** \brief total y promedio de los salarios, y cuantos empleados superan el salario promedio
+ * \param array empleados
+ * \param len
+ * \return (-1) En caso de que el puntero sea NULL o el size sea menor a 0. (0) si esta ok.
+ */
+int totalYPromedioSalariosEmpleados(sEmployee listEmployees[], int len)
+{
+    int ret = -1;
+    int i;
+    double totalSalarios = 0;
+    float promedioSalarios;
+    int cantEmpleados = 0;
+    int cantidadSuperanPromedio = 0;
+
+    if(listEmployees != NULL && len >= 0)
+    {
+        for(i=0;i<len;i++)
+        {
+            if(listEmployees[i].isEmpty == 1)
+            {
+                totalSalarios += listEmployees[i].salary;
+            }
+
+        }
+        cantEmpleados = cantidadEmpleados(listEmployees,len);
+        promedioSalarios = utn_sacarPromedio(totalSalarios,cantEmpleados);
+        cantidadSuperanPromedio = cantidadEmpleadosQueSuperanElPromedio(listEmployees,len,promedioSalarios);
+
+        printf("\nEl total de los salarios es: %.2f, el promedio de los salarios es: %.2f, y la cantidad de empleados que superan el promedio de salarios es: %d\n",totalSalarios,promedioSalarios,cantidadSuperanPromedio);
+        ret = 0;
+    }
+
+    return ret;
+}
+
+
+
+
 
 
 
